@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A practical guide to calculating elapsed time for shifts, schedules, support logs, and overnight intervals.">
+  <title>A Practical Guide to Calculating Time Gaps</title>
+  <style>
+    body { margin: 0; background: #f5f7fb; color: #172033; font: 18px/1.7 system-ui, sans-serif; }
+    main { max-width: 820px; margin: 48px auto; padding: 40px; background: white; border-radius: 16px; box-shadow: 0 12px 35px rgba(24,39,75,.08); }
+    h1, h2 { line-height: 1.2; color: #0f172a; }
+    h1 { font-size: 2.35rem; margin-top: 0; }
+    h2 { margin-top: 2rem; }
+    a { color: #0f766e; font-weight: 650; }
+    code { background: #eef2f7; padding: .12rem .35rem; border-radius: 5px; }
+    .example { border-left: 4px solid #14b8a6; background: #f0fdfa; padding: 1rem 1.25rem; }
+    footer { margin-top: 2.5rem; color: #64748b; font-size: .9rem; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>A Practical Guide to Calculating Time Gaps</h1>
+  <p>Elapsed-time questions appear everywhere: employee shifts, appointment windows, delivery estimates, exercise sessions, call logs, and support response times. The arithmetic is usually easy. The mistakes come from inconsistent formats, AM/PM confusion, and intervals that cross midnight.</p>
+  <h2>Start with a clear definition</h2>
+  <p>A time gap is a duration between two points on a timeline. It is not the same thing as a clock reading. “3:30 PM” is a time of day; “2 hours 15 minutes” is a duration. Keeping those ideas separate prevents misleading decimal answers.</p>
+  <h2>Normalize both clock readings</h2>
+  <p>Convert each value into minutes after midnight using <code>(hour × 60) + minute</code>. In 24-hour notation, 14:25 becomes 865 minutes. Then subtract the start value from the end value.</p>
+  <div class="example"><strong>Example:</strong> 8:40 AM is 520 minutes and 11:05 AM is 665 minutes. The difference is 145 minutes, which converts to 2 hours 25 minutes.</div>
+  <h2>Correctly handle midnight</h2>
+  <p>If an interval starts late at night and finishes after midnight, the end value will be numerically smaller. Add 1,440 minutes to the end before subtracting. A session from 11:20 PM to 12:50 AM therefore lasts 90 minutes, not a negative number.</p>
+  <h2>Use full dates when the interval is longer</h2>
+  <p>Clock times alone are not enough when a task can span several days. Record the date with each time. Full timestamps also make daylight-saving and time-zone behavior explicit. For remote teams, convert both timestamps to one zone—often UTC—before comparing them.</p>
+  <h2>Account for breaks separately</h2>
+  <p>Gross elapsed time and billable or worked time may be different. Calculate the full gap first, then subtract known breaks. For a 9:00 AM to 5:30 PM shift with a 45-minute unpaid break, the gross duration is 8 hours 30 minutes and the net duration is 7 hours 45 minutes.</p>
+  <h2>A fast verification method</h2>
+  <p>Estimate first, calculate second, and compare the two results. If a morning-to-afternoon interval returns 18 hours, the inputs probably have an AM/PM error. For a quick browser calculation, try this <a href="https://webtoolsedge.com/tools/time-gap-calculator">online time gap calculator</a> and then review the result against the original schedule.</p>
+  <h2>Common edge cases</h2>
+  <ul>
+    <li>Identical start and end times may mean zero duration or a full 24 hours; the date decides.</li>
+    <li>12:00 AM is midnight, while 12:00 PM is noon.</li>
+    <li>Thirty minutes is 0.5 hours, not 0.30 hours.</li>
+    <li>Different time zones must be normalized before subtraction.</li>
+    <li>A daylight-saving transition may add or remove an apparent hour.</li>
+  </ul>
+  <p>A dependable process is more important than a complicated formula: standardize the inputs, identify the correct day, subtract on one timeline, remove any breaks, and confirm the result is reasonable.</p>
+  <footer>Published as a practical reference for scheduling and timekeeping workflows.</footer>
+</main>
+</body>
+</html>
